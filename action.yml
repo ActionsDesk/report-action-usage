@@ -1,0 +1,49 @@
+name: 'action-uses-action'
+description: 'Action to grab GitHub Actions `uses` strings'
+
+inputs:
+  token:
+    description: 'GitHub Personal Access Token (PAT) with appropriate user/organization/enterprise scope'
+    required: true
+  enterprise:
+    description: 'GitHub Enterprise Cloud account slug'
+    required: false
+  owner:
+    description: |
+      GitHub organization/user login
+      If owner is a user, results for the authenticated user will be returned
+    required: false
+  exclude:
+    description: |
+      Exclude actions created by GitHub
+      i.e. actions from https://github.com/actions and https://github.com/github organizations
+    default: 'false'
+    required: false
+  csv:
+    description: 'Path to CSV for the output, e.g. /path/to/action-uses.csv'
+    default: ''
+    required: false
+  md:
+    description: 'Path to markdown for the output, e.g. /path/to/action-uses.md'
+    default: ''
+    required: false
+  push_results_to_repo:
+    description: Push the CSV/markdown results to the repoository
+    default: 'false'
+    required: false
+
+outputs:
+  csv_result:
+    description: 'GitHub Actions used as CSV (only if `csv` input provided)'
+  md_result:
+    description: 'GitHub Actions used as markdown (only if `md` input provided)'
+  json_result:
+    description: 'GitHub Actions used as JSON'
+
+runs:
+  using: 'node12'
+  main: 'dist/index.js'
+
+branding:
+  icon: 'check-circle'
+  color: 'green'
