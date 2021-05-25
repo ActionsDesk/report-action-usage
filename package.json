@@ -1,7 +1,7 @@
 {
-  "name": "action-uses-action",
-  "version": "1.0.0",
-  "description": "Action to grab GitHub Actions `uses` strings",
+  "name": "report-action-usage",
+  "version": "2.0.0",
+  "description": "Action to create a CSV or Markdown report of GitHub Actions used",
   "keywords": [],
   "author": {
     "name": "GitHub Professional Services",
@@ -16,7 +16,7 @@
     }
   ],
   "license": "MIT",
-  "repository": "github:ActionsDesk/action-uses-action",
+  "repository": "github:ActionsDesk/report-action-usage",
   "engines": {
     "node": ">=14",
     "npm": ">=7"
@@ -28,13 +28,13 @@
     "test": "eslint ."
   },
   "dependencies": {
-    "@actions/core": "^1.2.7",
+    "@actions/core": "^1.3.0",
     "@actions/github": "^5.0.0",
     "@stoe/action-uses-cli": "^2.1.2"
   },
   "devDependencies": {
     "@github/prettier-config": "^0.0.4",
-    "eslint": "^7.26.0",
+    "eslint": "^7.27.0",
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-github": "^4.1.3"
   },

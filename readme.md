@@ -1,8 +1,8 @@
-# action-uses-action
+# report-action-usage
 
-> Action to grab GitHub Actions `uses` strings
+> Action to create a CSV or Markdown report of GitHub Actions used
 
-[![Test](https://github.com/ActionsDesk/action-uses-action/actions/workflows/test.yml/badge.svg)](https://github.com/ActionsDesk/action-uses-action/actions/workflows/test.yml) [![Create Release](https://github.com/ActionsDesk/action-uses-action/actions/workflows/release.yml/badge.svg)](https://github.com/ActionsDesk/action-uses-action/actions/workflows/release.yml) [![styled with prettier](https://img.shields.io/badge/styled_with-prettier-ff69b4.svg)](https://github.com/prettier/prettier)
+[![Test](https://github.com/ActionsDesk/report-action-usage/actions/workflows/test.yml/badge.svg)](https://github.com/ActionsDesk/report-action-usage/actions/workflows/test.yml) [![Create Release](https://github.com/ActionsDesk/report-action-usage/actions/workflows/release.yml/badge.svg)](https://github.com/ActionsDesk/report-action-usage/actions/workflows/release.yml) [![styled with prettier](https://img.shields.io/badge/styled_with-prettier-ff69b4.svg)](https://github.com/prettier/prettier)
 
 ## Usage
 
@@ -33,7 +33,7 @@ jobs:
         with:
           node-version: 14.x
 
-      - uses: ActionsDesk/action-uses-action@main
+      - uses: ActionsDesk/report-action-usage@main
         id: action-uses
         with:
           token: ${{ secrets.ENTERPRISE_ADMIN_TOKEN }}
@@ -91,7 +91,7 @@ jobs:
         with:
           node-version: 14.x
 
-      - uses: ActionsDesk/action-uses-action@main
+      - uses: ActionsDesk/report-action-usage@main
         with:
           token: ${{ secrets.ENTERPRISE_ADMIN_TOKEN }}
           enterprise: ${{ github.event.inputs.enterprise }}

@@ -51,8 +51,8 @@ import FindActionUses from '@stoe/action-uses-cli'
     const commitOptions = {
       ...context.repo,
       committer: {
-        name: 'action-uses-action[bot]',
-        email: 'action-uses-action@bot'
+        name: 'github-actions[bot]',
+        email: '41898282+github-actions[bot]@users.noreply.github.com'
       }
     }
 
