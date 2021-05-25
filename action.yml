@@ -1,5 +1,5 @@
-name: 'action-uses-action'
-description: 'Action to grab GitHub Actions `uses` strings'
+name: 'report-action-usage'
+description: 'Action to create a CSV or Markdown report of GitHub Actions used'
 
 inputs:
   token:
