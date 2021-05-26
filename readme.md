@@ -33,7 +33,7 @@ jobs:
         with:
           node-version: 14.x
 
-      - uses: ActionsDesk/report-action-usage@main
+      - uses: ActionsDesk/report-action-usage@v2.0.1
         id: action-uses
         with:
           token: ${{ secrets.ENTERPRISE_ADMIN_TOKEN }}
@@ -91,7 +91,7 @@ jobs:
         with:
           node-version: 14.x
 
-      - uses: ActionsDesk/report-action-usage@main
+      - uses: ActionsDesk/report-action-usage@v2.0.1
         with:
           token: ${{ secrets.ENTERPRISE_ADMIN_TOKEN }}
           enterprise: ${{ github.event.inputs.enterprise }}
