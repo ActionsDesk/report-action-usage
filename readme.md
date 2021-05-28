@@ -2,7 +2,7 @@
 
 > Action to create a CSV or Markdown report of GitHub Actions used
 
-[![Test](https://github.com/ActionsDesk/report-action-usage/actions/workflows/test.yml/badge.svg)](https://github.com/ActionsDesk/report-action-usage/actions/workflows/test.yml) [![Create Release](https://github.com/ActionsDesk/report-action-usage/actions/workflows/release.yml/badge.svg)](https://github.com/ActionsDesk/report-action-usage/actions/workflows/release.yml) [![styled with prettier](https://img.shields.io/badge/styled_with-prettier-ff69b4.svg)](https://github.com/prettier/prettier)
+[![Test](https://github.com/ActionsDesk/report-action-usage/actions/workflows/test.yml/badge.svg)](https://github.com/ActionsDesk/report-action-usage/actions/workflows/test.yml) [![styled with prettier](https://img.shields.io/badge/styled_with-prettier-ff69b4.svg)](https://github.com/prettier/prettier)
 
 ## Usage
 
