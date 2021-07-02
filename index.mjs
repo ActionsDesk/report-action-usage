@@ -1,5 +1,5 @@
 import {join, parse} from 'path'
-import {getInput, setFailed, setOutput} from '@actions/core'
+import {getInput, getBooleanInput, setFailed, setOutput} from '@actions/core'
 import github from '@actions/github'
 import FindActionUses from '@stoe/action-uses-cli'
 
@@ -11,10 +11,9 @@ import FindActionUses from '@stoe/action-uses-cli'
     const owner = getInput('owner', {required: false}) || null
     const csv = getInput('csv', {required: false}) || ''
     const md = getInput('md', {required: false}) || ''
-
-    // workaround until @actions/core.getBooleanInput() is available
-    const exclude = getInput('exclude', {required: false}).toLocaleLowerCase() === 'true'
-    const pushToRepo = getInput('push_results_to_repo', {required: false}).toLocaleLowerCase() === 'true'
+    const exclude = getBooleanInput('exclude', {required: false}) || false
+    const unique = getBooleanInput('unique', {required: false}) || false
+    const pushToRepo = getBooleanInput('push_results_to_repo', {required: false}) || false
 
     if (!(enterprise || owner)) {
       throw new Error('One of enterprise, owner is required')
@@ -43,9 +42,9 @@ import FindActionUses from '@stoe/action-uses-cli'
     }
 
     const fau = new FindActionUses(token, enterprise, owner, null, csv, md, exclude)
-    const actions = await fau.getActionUses()
+    const actions = await fau.getActionUses(unique)
 
-    const octokit = github.getOctokit(token)
+    const octokit = await github.getOctokit(token)
     const context = github.context
 
     const commitOptions = {
@@ -58,17 +57,14 @@ import FindActionUses from '@stoe/action-uses-cli'
 
     // Create and save CSV
     if (csv !== '') {
-      const csvOut = await fau.saveCsv(actions)
+      const csvOut = await fau.saveCsv(actions, unique)
 
       if (pushToRepo) {
-        await pushFileToRepo({
-          octokit,
-          options: {
-            ...commitOptions,
-            path: csv,
-            message: `Save/Update GitHub Actions usage report (csv)`,
-            content: Buffer.from(csvOut).toString('base64')
-          }
+        await pushFileToRepo(octokit, {
+          ...commitOptions,
+          path: csv,
+          message: `Save/Update GitHub Actions usage report (csv)`,
+          content: Buffer.from(csvOut).toString('base64')
         })
       }
 
@@ -77,17 +73,14 @@ import FindActionUses from '@stoe/action-uses-cli'
 
     // Create and save markdown
     if (md !== '') {
-      const mdOut = await fau.saveMarkdown(actions)
+      const mdOut = await fau.saveMarkdown(actions, unique)
 
       if (pushToRepo) {
-        await pushFileToRepo({
-          octokit,
-          options: {
-            ...commitOptions,
-            path: md,
-            message: `Save/Update GitHub Actions usage report (md)`,
-            content: Buffer.from(mdOut).toString('base64')
-          }
+        await pushFileToRepo(octokit, {
+          ...commitOptions,
+          path: md,
+          message: `Save/Update GitHub Actions usage report (md)`,
+          content: Buffer.from(mdOut).toString('base64')
         })
       }
 
@@ -103,6 +96,7 @@ import FindActionUses from '@stoe/action-uses-cli'
 /**
  * @private
  *
+ * @param {import('@octokit/core').Octokit} octokit
  * @param {object} options
  * @param {string} options.owner
  * @param {string} options.repo
@@ -110,7 +104,7 @@ import FindActionUses from '@stoe/action-uses-cli'
  * @param {string} options.message
  * @param {string} options.content
  */
-const pushFileToRepo = async ({octokit, options}) => {
+const pushFileToRepo = async (octokit, options) => {
   try {
     const {data} = await octokit.rest.repos.getContent({
       owner: options.owner,

@@ -110,6 +110,7 @@ jobs:
 | `enterprise`           | GitHub Enterprise Cloud account slug, will require `read:org`, `read:enterprise`, and `repo` scoped [PAT] for `token`          |         | `false`  |
 | `owner`                | GitHub organization/user login, will require `read:org` (only if querying an organization) and `repo` scoped [PAT] for `token` |         | `false`  |
 | `exclude`              | Exclude actions created by GitHub, i.e. actions from https://github.com/actions and https://github.com/github organizations    | `false` | `false`  |
+| `unique`               | List unique GitHub Actions only                                                                                                | `false` | `false`  |
 | `csv`                  | Path to CSV for the output, e.g. /path/to/action-uses.csv                                                                      |         | `false`  |
 | `md`                   | Path to markdown for the output, e.g. /path/to/action-uses.md                                                                  |         | `false`  |
 | `push_results_to_repo` | Push the CSV/markdown results to the repoository                                                                               | `false` | `false`  |

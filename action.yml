@@ -19,6 +19,10 @@ inputs:
       i.e. actions from https://github.com/actions and https://github.com/github organizations
     default: 'false'
     required: false
+  unique:
+    description: 'Only list unique GitHub Actions'
+    default: 'false'
+    required: false
   csv:
     description: 'Path to CSV for the output, e.g. /path/to/action-uses.csv'
     default: ''
