@@ -29,7 +29,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2.3.4
 
-      - uses: ActionsDesk/report-action-usage@v2.0.1
+      - uses: ActionsDesk/report-action-usage@v2.1.0
         id: action-uses
         with:
           token: ${{ secrets.ENTERPRISE_ADMIN_TOKEN }}
@@ -83,7 +83,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2.3.4
 
-      - uses: ActionsDesk/report-action-usage@v2.0.1
+      - uses: ActionsDesk/report-action-usage@v2.1.0
         with:
           token: ${{ secrets.ENTERPRISE_ADMIN_TOKEN }}
           enterprise: ${{ github.event.inputs.enterprise }}
