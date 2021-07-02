@@ -1,6 +1,6 @@
 {
   "name": "report-action-usage",
-  "version": "2.0.1",
+  "version": "2.1.0",
   "description": "Action to create a CSV or Markdown report of GitHub Actions used",
   "keywords": [],
   "author": {
@@ -30,11 +30,11 @@
   "dependencies": {
     "@actions/core": "^1.4.0",
     "@actions/github": "^5.0.0",
-    "@stoe/action-uses-cli": "^2.2.0"
+    "@stoe/action-uses-cli": "^2.3.1"
   },
   "devDependencies": {
     "@github/prettier-config": "^0.0.4",
-    "eslint": "^7.28.0",
+    "eslint": "^7.29.0",
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-github": "^4.1.3"
   },
