@@ -29,10 +29,6 @@ jobs:
     steps:
       - uses: actions/checkout@v2.3.4
 
-      - uses: actions/setup-node@v2.1.5
-        with:
-          node-version: 14.x
-
       - uses: ActionsDesk/report-action-usage@v2.0.1
         id: action-uses
         with:
@@ -86,10 +82,6 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2.3.4
-
-      - uses: actions/setup-node@v2.1.5
-        with:
-          node-version: 14.x
 
       - uses: ActionsDesk/report-action-usage@v2.0.1
         with:
