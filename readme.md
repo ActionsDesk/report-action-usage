@@ -29,7 +29,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2.3.4
 
-      - uses: ActionsDesk/report-action-usage@v2.1.0
+      - uses: ActionsDesk/report-action-usage@v2.1.1
         id: action-uses
         with:
           token: ${{ secrets.ENTERPRISE_ADMIN_TOKEN }}
@@ -83,7 +83,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2.3.4
 
-      - uses: ActionsDesk/report-action-usage@v2.1.0
+      - uses: ActionsDesk/report-action-usage@v2.1.1
         with:
           token: ${{ secrets.ENTERPRISE_ADMIN_TOKEN }}
           enterprise: ${{ github.event.inputs.enterprise }}
@@ -149,15 +149,15 @@ org2  ,repo1 ,.github/workflows/python-test.yml     ,actions/setup-python@v2
 <details>
   <summary><strong>Rendered</strong></summary>
 
-owner | repo | workflow | action
------ | ----- | ----- | -----
-org1 | repo1 | [.github/workflows/test.yml](https://github.com/org1/repo1/blob/HEAD/.github/workflows/test.yml) | [actions/checkout@v2.3.4](https://github.com/actions/checkout)
-org1 | repo1 | [.github/workflows/test.yml](https://github.com/org1/repo1/blob/HEAD/.github/workflows/test.yml) | [actions/setup-node@v2.2.0](https://github.com/actions/setup-node)
-org1 | repo2 | [.github/workflows/codeql-analysis.yml](https://github.com/org1/repo2/blob/HEAD/.github/workflows/codeql-analysis.yml) | [github/codeql-action/analyze@v1](https://github.com/github/codeql-action)
-org1 | repo2 | [.github/workflows/codeql-analysis.yml](https://github.com/org1/repo2/blob/HEAD/.github/workflows/codeql-analysis.yml) | [github/codeql-action/autobuild@v1](https://github.com/github/codeql-action)
-org1 | repo2 | [.github/workflows/codeql-analysis.yml](https://github.com/org1/repo2/blob/HEAD/.github/workflows/codeql-analysis.yml) | [github/codeql-action/init@v1](https://github.com/github/codeql-action)
-org2 | repo1 | [.github/workflows/python-test.yml](https://github.com/org2/repo1/blob/HEAD/.github/workflows/python-test.yml) | [actions/checkout@v2](https://github.com/actions/checkout)
-org2 | repo1 | [.github/workflows/python-test.yml](https://github.com/org2/repo1/blob/HEAD/.github/workflows/python-test.yml) | [actions/setup-python@v2](https://github.com/actions/setup-python)
+| owner | repo  | workflow                                                                                                               | action                                                                       |
+| ----- | ----- | ---------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------- |
+| org1  | repo1 | [.github/workflows/test.yml](https://github.com/org1/repo1/blob/HEAD/.github/workflows/test.yml)                       | [actions/checkout@v2.3.4](https://github.com/actions/checkout)               |
+| org1  | repo1 | [.github/workflows/test.yml](https://github.com/org1/repo1/blob/HEAD/.github/workflows/test.yml)                       | [actions/setup-node@v2.2.0](https://github.com/actions/setup-node)           |
+| org1  | repo2 | [.github/workflows/codeql-analysis.yml](https://github.com/org1/repo2/blob/HEAD/.github/workflows/codeql-analysis.yml) | [github/codeql-action/analyze@v1](https://github.com/github/codeql-action)   |
+| org1  | repo2 | [.github/workflows/codeql-analysis.yml](https://github.com/org1/repo2/blob/HEAD/.github/workflows/codeql-analysis.yml) | [github/codeql-action/autobuild@v1](https://github.com/github/codeql-action) |
+| org1  | repo2 | [.github/workflows/codeql-analysis.yml](https://github.com/org1/repo2/blob/HEAD/.github/workflows/codeql-analysis.yml) | [github/codeql-action/init@v1](https://github.com/github/codeql-action)      |
+| org2  | repo1 | [.github/workflows/python-test.yml](https://github.com/org2/repo1/blob/HEAD/.github/workflows/python-test.yml)         | [actions/checkout@v2](https://github.com/actions/checkout)                   |
+| org2  | repo1 | [.github/workflows/python-test.yml](https://github.com/org2/repo1/blob/HEAD/.github/workflows/python-test.yml)         | [actions/setup-python@v2](https://github.com/actions/setup-python)           |
 
 </details>
 
