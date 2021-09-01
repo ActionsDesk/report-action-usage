@@ -28,7 +28,7 @@
     "test": "eslint ."
   },
   "dependencies": {
-    "@actions/core": "^1.4.0",
+    "@actions/core": "^1.5.0",
     "@actions/github": "^5.0.0",
     "@stoe/action-uses-cli": "^2.3.4"
   },
