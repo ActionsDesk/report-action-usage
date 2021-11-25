@@ -24,6 +24,7 @@
   "main": "index.mjs",
   "scripts": {
     "build": "npx @vercel/ncc build index.mjs --out dist --license licenses.txt --quiet --minify",
+    "format": "npx prettier --config-precedence prefer-file --write . && eslint . --fix",
     "pretest": "npx eslint-config-prettier .eslintrc.json",
     "test": "eslint ."
   },
