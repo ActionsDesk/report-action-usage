@@ -20,7 +20,7 @@ inputs:
     default: 'false'
     required: false
   unique:
-    description: 'Only list unique GitHub Actions'
+    description: 'List unique GitHub Actions. Possible values are `true`, `false` and `both`.'
     default: 'false'
     required: false
   csv:
@@ -39,8 +39,14 @@ inputs:
 outputs:
   csv_result:
     description: 'GitHub Actions used as CSV (only if `csv` input provided)'
+  csv_result_unique:
+    description: |
+      GitHub Actions used as CSV (only if `csv` input provided and `unique=both`)
   md_result:
     description: 'GitHub Actions used as markdown (only if `md` input provided)'
+  md_result_unique:
+    description: |
+      GitHub Actions used as markdown (only if `md` input provided and `unique=both`)
   json_result:
     description: 'GitHub Actions used as JSON'
 
@@ -49,5 +55,5 @@ runs:
   main: 'dist/index.js'
 
 branding:
-  icon: 'check-circle'
+  icon: 'list'
   color: 'green'
