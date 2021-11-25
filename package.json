@@ -25,6 +25,7 @@
   "scripts": {
     "build": "npx @vercel/ncc build index.mjs --out dist --license licenses.txt --quiet --minify",
     "format": "npx prettier --config-precedence prefer-file --write . && eslint . --fix",
+    "prebuild": "rimraf dist",
     "pretest": "npx eslint-config-prettier .eslintrc.json",
     "test": "eslint ."
   },
@@ -38,6 +39,7 @@
     "eslint": "^8.3.0",
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-github": "^4.3.5",
+    "rimraf": "^3.0.2"
   },
   "prettier": "@github/prettier-config"
 }
