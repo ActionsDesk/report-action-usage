@@ -1,6 +1,6 @@
 {
   "name": "report-action-usage",
-  "version": "2.1.2",
+  "version": "2.5.0",
   "description": "Action to create a CSV or Markdown report of GitHub Actions used",
   "keywords": [],
   "author": {
