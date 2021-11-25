@@ -27,7 +27,8 @@
     "format": "npx prettier --config-precedence prefer-file --write . && eslint . --fix",
     "prebuild": "rimraf dist",
     "pretest": "npx eslint-config-prettier .eslintrc.json",
-    "test": "eslint ."
+    "test": "eslint .",
+    "prepare": "husky install ./.github/husky"
   },
   "dependencies": {
     "@actions/core": "^1.6.0",
@@ -39,7 +40,14 @@
     "eslint": "^8.3.0",
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-github": "^4.3.5",
+    "husky": "^7.0.4",
     "rimraf": "^3.0.2"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "./.github/husky/pre-commit",
+      "pre-push": "./.github/husky/pre-push"
+    }
   },
   "prettier": "@github/prettier-config"
 }
