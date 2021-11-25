@@ -1,7 +1,7 @@
+import {context, getOctokit} from '@actions/github'
+import {getBooleanInput, getInput, setFailed, setOutput} from '@actions/core'
 import {join, parse} from 'path'
-import {getInput, getBooleanInput, setFailed, setOutput} from '@actions/core'
-import github from '@actions/github'
-import FindActionUses from '@stoe/action-uses-cli'
+import FindActionUses from '@stoe/action-uses-cli/utils/action-uses'
 
 // action
 ;(async () => {
@@ -44,8 +44,7 @@ import FindActionUses from '@stoe/action-uses-cli'
     const fau = new FindActionUses(token, enterprise, owner, null, csv, md, exclude)
     const actions = await fau.getActionUses(unique)
 
-    const octokit = await github.getOctokit(token)
-    const context = github.context
+    const octokit = await getOctokit(token)
 
     const commitOptions = {
       ...context.repo,
