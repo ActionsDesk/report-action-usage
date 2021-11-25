@@ -12,15 +12,20 @@ import FindActionUses from '@stoe/action-uses-cli/utils/action-uses'
     const csv = getInput('csv', {required: false}) || ''
     const md = getInput('md', {required: false}) || ''
     const exclude = getBooleanInput('exclude', {required: false}) || false
-    const unique = getBooleanInput('unique', {required: false}) || false
+    const unique = getInput('unique', {required: false}) || false
     const pushToRepo = getBooleanInput('push_results_to_repo', {required: false}) || false
 
     if (!(enterprise || owner)) {
-      throw new Error('One of enterprise, owner is required')
+      throw new Error('Please provide a valid value: enterprise or owner')
     }
 
     if (enterprise && owner) {
-      throw new Error('Can only use one of enterprise, owner')
+      throw new Error('Can only use one of: enterprise, owner')
+    }
+
+    const uniqueFlag = unique === 'both' ? 'both' : unique === 'true'
+    if (![true, false, 'both'].includes(uniqueFlag)) {
+      throw new Error('Please provide a valid value for unique: true, false, both')
     }
 
     if (csv !== '') {
@@ -41,22 +46,25 @@ import FindActionUses from '@stoe/action-uses-cli/utils/action-uses'
       }
     }
 
-    const fau = new FindActionUses(token, enterprise, owner, null, csv, md, exclude)
+    const fau = new FindActionUses(token, enterprise, owner, null, csv, md, unique, exclude)
     const actions = await fau.getActionUses(unique)
 
     const octokit = await getOctokit(token)
 
-    const commitOptions = {
-      ...context.repo,
-      committer: {
-        name: 'github-actions[bot]',
-        email: '41898282+github-actions[bot]@users.noreply.github.com'
-      }
-    }
+    const commitOptions = pushToRepo
+      ? {
+          ...context.repo,
+          committer: {
+            name: 'github-actions[bot]',
+            email: '41898282+github-actions[bot]@users.noreply.github.com'
+          }
+        }
+      : {}
 
     // Create and save CSV
     if (csv !== '') {
-      const csvOut = await fau.saveCsv(actions, unique)
+      const {csv: csvOut, csvUnique: csvUniqueOut} = await fau.saveCsv(actions, unique)
+      const csvPathUnique = `${csv.replace('.csv', '-unique.csv')}`
 
       if (pushToRepo) {
         await pushFileToRepo(octokit, {
@@ -65,14 +73,28 @@ import FindActionUses from '@stoe/action-uses-cli/utils/action-uses'
           message: `Save/Update GitHub Actions usage report (csv)`,
           content: Buffer.from(csvOut).toString('base64')
         })
+
+        if (uniqueFlag === 'both') {
+          await pushFileToRepo(octokit, {
+            ...commitOptions,
+            path: csvPathUnique,
+            message: `Save/Update GitHub Actions usage report (csv)`,
+            content: Buffer.from(csvUniqueOut).toString('base64')
+          })
+        }
       }
 
       setOutput('csv_result', csvOut)
+
+      if (uniqueFlag === 'both') {
+        setOutput('csv_resul_unique', csvUniqueOut)
+      }
     }
 
     // Create and save markdown
     if (md !== '') {
-      const mdOut = await fau.saveMarkdown(actions, unique)
+      const {md: mdOut, mdUnique: mdUniqueOut} = await fau.saveMarkdown(actions, unique)
+      const mdPathUnique = `${md.replace('.md', '-unique.md')}`
 
       if (pushToRepo) {
         await pushFileToRepo(octokit, {
@@ -81,9 +103,22 @@ import FindActionUses from '@stoe/action-uses-cli/utils/action-uses'
           message: `Save/Update GitHub Actions usage report (md)`,
           content: Buffer.from(mdOut).toString('base64')
         })
+
+        if (uniqueFlag === 'both') {
+          await pushFileToRepo(octokit, {
+            ...commitOptions,
+            path: mdPathUnique,
+            message: `Save/Update GitHub Actions usage report (md)`,
+            content: Buffer.from(mdUniqueOut).toString('base64')
+          })
+        }
       }
 
       setOutput('md_result', mdOut)
+
+      if (uniqueFlag === 'both') {
+        setOutput('md_result_unique', mdUniqueOut)
+      }
     }
 
     setOutput('json_result', JSON.stringify(actions))
@@ -129,5 +164,6 @@ const pushFileToRepo = async (octokit, options) => {
     // do nothing
   }
 
+  // https://docs.github.com/en/rest/reference/repos#create-or-update-file-contents
   await octokit.rest.repos.createOrUpdateFileContents(options)
 }
