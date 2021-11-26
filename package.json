@@ -26,9 +26,9 @@
     "build": "npx @vercel/ncc build action.js --out dist --license licenses.txt --quiet --minify",
     "format": "npx prettier --config-precedence prefer-file --write . && eslint . --fix",
     "prebuild": "rimraf dist",
+    "prepare": "husky install ./.github/husky",
     "pretest": "npx eslint-config-prettier .eslintrc.json",
-    "test": "eslint .",
-    "prepare": "husky install ./.github/husky"
+    "test": "eslint ."
   },
   "dependencies": {
     "@actions/core": "^1.6.0",
