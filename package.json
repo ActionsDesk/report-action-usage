@@ -21,9 +21,9 @@
     "node": ">=16",
     "npm": ">=8"
   },
-  "main": "index.js",
+  "main": "action.js",
   "scripts": {
-    "build": "npx @vercel/ncc build index.js --out dist --license licenses.txt --quiet --minify",
+    "build": "npx @vercel/ncc build action.js --out dist --license licenses.txt --quiet --minify",
     "format": "npx prettier --config-precedence prefer-file --write . && eslint . --fix",
     "prebuild": "rimraf dist",
     "pretest": "npx eslint-config-prettier .eslintrc.json",
