@@ -1,3 +1,5 @@
+⚠️ No longer maintained.
+
 # report-action-usage
 
 > Action to create a CSV or Markdown report of GitHub Actions used
